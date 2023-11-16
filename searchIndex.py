@@ -113,16 +113,20 @@
 #     print("----------")
 
 
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Path
 from fastapi.staticfiles import StaticFiles
 from annoy import AnnoyIndex
 import sqlite3
+import os
 from sentence_transformers import SentenceTransformer
 from typing import List, Dict
 from fastapi.responses import HTMLResponse
 import requests
 import base64
 import fitz
+from PIL import Image
+from fastapi.responses import StreamingResponse
+from io import BytesIO
 
 app = FastAPI()
 
@@ -192,3 +196,34 @@ async def preview_pdf(pdf_url: str = Query(...), page_number: int = Query(...)):
     # Embed the image in an HTML response
     html_response = f"<img src='data:image/png;base64,{img_base64}' alt='Preview' style='max-width:100%;'>"
     return HTMLResponse(content=html_response, status_code=200)
+
+
+pdfs_folder = "pdfs"  # Replace with the path to your "pdfs" folder
+
+@app.get("/pdf_image/{file_name}/{page_number}")
+async def get_pdf_image(file_name: str = Path(...), page_number: int = Path(...)):
+    pdf_path = os.path.join(pdfs_folder, file_name)
+    
+    if not os.path.exists(pdf_path) or not pdf_path.lower().endswith(".pdf"):
+        return {"message": "PDF file not found or invalid"}
+
+    pdf_document = fitz.open(pdf_path)
+    
+    if page_number < 1 or page_number > pdf_document.page_count:
+        pdf_document.close()
+        return {"message": "Invalid page number"}
+
+    page = pdf_document.load_page(page_number - 1)  # Page numbers start from 0 in PyMuPDF
+    pixmap = page.get_pixmap(matrix=fitz.Matrix(2, 2))  # Adjust scale if needed
+
+    # Convert the pixmap to a PIL image
+    pil_image = Image.frombytes("RGB", [pixmap.width, pixmap.height], pixmap.samples)
+
+    # Save the PIL image as a PNG file in memory
+    png_image = BytesIO()
+    pil_image.save(png_image, format="PNG")
+    png_image.seek(0)
+
+    pdf_document.close()
+
+    return StreamingResponse(png_image, media_type="image/png")

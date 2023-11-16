@@ -2,7 +2,7 @@
 # import requests
 
 # # FastAPI backend URL
-# backend_url = "http://localhost:8000/find_similar_text/"  # Replace with your actual FastAPI backend URL
+# backend_url = "http://localhost:8000/find_similar_text/"  
 
 # st.title("Text Chunk Search App")
 
@@ -40,7 +40,7 @@
 # import requests
 
 # # FastAPI backend URL
-# backend_url = "http://localhost:8000/find_similar_text/"  # Replace with your actual FastAPI backend URL
+# backend_url = "http://localhost:8000/find_similar_text/"  
 
 # st.title("Text Chunk Search App")
 
@@ -79,7 +79,7 @@
 # import requests
 
 # # FastAPI backend URL
-# backend_url = "http://localhost:8000/find_similar_text/"  # Replace with your actual FastAPI backend URL
+# backend_url = "http://localhost:8000/find_similar_text/" 
 
 # st.title("Text Chunk Search App")
 
@@ -124,7 +124,7 @@
 # import urllib.parse
 
 # # FastAPI backend URL
-# backend_url = "http://localhost:8000/find_similar_text/"  # Replace with your actual FastAPI backend URL
+# backend_url = "http://localhost:8000/find_similar_text/"  
 
 # st.title("Text Chunk Search App")
 
@@ -171,7 +171,7 @@
 # import base64
 
 # # FastAPI backend URL
-# backend_url = "http://localhost:8000/find_similar_text/"  # Replace with your actual FastAPI backend URL
+# backend_url = "http://localhost:8000/find_similar_text/"  
 
 # st.title("CourtDoc Navigator 🔎")
 
@@ -243,8 +243,8 @@ from PIL import Image
 import urllib.parse
 
 # FastAPI backend URL
-backend_url = "http://localhost:8000/find_similar_text/"  # Replace with your actual FastAPI backend URL
-
+backend_url = "http://localhost:8000/find_similar_text/"  
+base_url="http://localhost:8000"
 def display_pdf_page_as_image(pdf_url, page_number):
     pdf_data = requests.get(pdf_url).content
     pdf_document = fitz.open(stream=BytesIO(pdf_data), filetype="pdf")
@@ -283,12 +283,17 @@ if st.button("Search"):
                     pdf_url = f"http://localhost:8000/pdfs/{urllib.parse.quote(pdf_filename)}"
                     
                     # Display preview image without using multiple buttons
-                    img_placeholder = st.empty()  # Placeholder for the image
-                    if st.button(f"Preview Chunk {idx}"):
-                        image = display_pdf_page_as_image(pdf_url, page_number)
-                        img_bytes = image.tobytes()
-                        img = Image.open(BytesIO(img_bytes))
-                        img_placeholder.image(img, caption=f"Page {page_number} as Image", use_column_width=True)
+                    # button_key = f"display_page_{idx}_image" 
+                    # if st.button("Display Page as Image", key=button_key):
+                    #     pdf_image_url = f"{backend_url}/pdf_image/{pdf_filename}/{page_number}"
+                    #     response = requests.get(pdf_image_url)
+                        
+                    #     if response.status_code == 200:
+                    #         st.image(response.content, use_column_width=True)
+                    #     else:
+                    #         st.write("Error: Unable to fetch the image.")
+                    image_link = f"{base_url}/pdf_image/{pdf_filename}/{page_number}"
+                    st.markdown(f"Preview: [View]({image_link})")
 
                     st.markdown("---")  # Add a horizontal line to separate cards
             else:
