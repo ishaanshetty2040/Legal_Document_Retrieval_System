@@ -245,12 +245,29 @@ import urllib.parse
 # FastAPI backend URL
 backend_url = "http://localhost:8000/find_similar_text/"  
 base_url="http://localhost:8000"
+# def display_pdf_page_as_image(pdf_url, page_number):
+#     pdf_data = requests.get(pdf_url).content
+#     pdf_document = fitz.open(stream=BytesIO(pdf_data), filetype="pdf")
+#     page = pdf_document.load_page(page_number - 1)  # Page numbers start from 0 in PyMuPDF
+#     image = page.get_pixmap(matrix=fitz.Matrix(2, 2))  # Adjust scale if needed
+#     return image
+
 def display_pdf_page_as_image(pdf_url, page_number):
-    pdf_data = requests.get(pdf_url).content
-    pdf_document = fitz.open(stream=BytesIO(pdf_data), filetype="pdf")
-    page = pdf_document.load_page(page_number - 1)  # Page numbers start from 0 in PyMuPDF
-    image = page.get_pixmap(matrix=fitz.Matrix(2, 2))  # Adjust scale if needed
-    return image
+    # Download the PDF file from the backend URL
+    pdf_response = requests.get(pdf_url)
+    
+    if pdf_response.status_code == 200:
+        # Open the downloaded PDF as a PyMuPDF document
+        pdf_document = fitz.open(stream=pdf_response.content, filetype="pdf")
+        
+        # Load the specified page (Page numbers start from 0 in PyMuPDF)
+        page = pdf_document.load_page(page_number - 1)
+        
+        # Get the page as an image (adjust scale if needed)
+        image = page.get_pixmap(matrix=fitz.Matrix(2, 2))  # Adjust scale if needed
+        return image
+    else:
+        return None  # Return None if there's an issue downloading the PDF
 
 st.title("CourtDoc Navigator 🔎")
 
@@ -272,7 +289,7 @@ if st.button("Search"):
                     pdf_filename = chunk["document_file_name"]
 
                     # Display each chunk within a card
-                    st.write(f"**Chunk {idx}**")
+                    st.write(f"**Filename: {pdf_filename}**")
                     st.write(f"Page Number: {page_number}")
                     st.write(context_text)
 
@@ -292,8 +309,15 @@ if st.button("Search"):
                     #         st.image(response.content, use_column_width=True)
                     #     else:
                     #         st.write("Error: Unable to fetch the image.")
-                    image_link = f"{base_url}/pdf_image/{pdf_filename}/{page_number}"
+                    image_link = f"{base_url}/pdf_image/{urllib.parse.quote(pdf_filename)}/{page_number}"
                     st.markdown(f"Preview: [View]({image_link})")
+                    button_key = f"display_page_{idx}_image" 
+                    if st.button("Display Page as Image",key=button_key):
+                        # pdf_url.seek(0)  # Reset file pointer to the beginning
+                        image = display_pdf_page_as_image(pdf_url, page_number)
+                        img_bytes = image.tobytes()
+                        img = Image.open(BytesIO(img_bytes))
+                        st.image(img, caption=f"Page {page_number} as Image", use_column_width=True)
 
                     st.markdown("---")  # Add a horizontal line to separate cards
             else:
