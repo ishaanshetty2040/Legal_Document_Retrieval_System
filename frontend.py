@@ -237,21 +237,18 @@
 #6th code
 import streamlit as st
 import requests
-import fitz  # PyMuPDF
+import urllib.parse
+import fitz
 from io import BytesIO
 from PIL import Image
-import urllib.parse
 
-# FastAPI backend URL
+# Backend URLs
+backend_url = "http://localhost:8000/find_similar_text/"
+summary_url = "http://localhost:8000/summarize_document/"
+pdf_image_url = "http://localhost:8000/pdf_image/"
 backend_url = "http://localhost:8000/find_similar_text/"  
 base_url="http://localhost:8000"
-# def display_pdf_page_as_image(pdf_url, page_number):
-#     pdf_data = requests.get(pdf_url).content
-#     pdf_document = fitz.open(stream=BytesIO(pdf_data), filetype="pdf")
-#     page = pdf_document.load_page(page_number - 1)  # Page numbers start from 0 in PyMuPDF
-#     image = page.get_pixmap(matrix=fitz.Matrix(2, 2))  # Adjust scale if needed
-#     return image
-
+# Function to display PDF page as image
 def display_pdf_page_as_image(pdf_url, page_number):
     # Download the PDF file from the backend URL
     pdf_response = requests.get(pdf_url)
@@ -268,16 +265,20 @@ def display_pdf_page_as_image(pdf_url, page_number):
         return image
     else:
         return None  # Return None if there's an issue downloading the PDF
-
 st.title("CourtDoc Navigator 🔎")
 
 # Input for the query
 query = st.text_input("Enter your query:")
 
+# Checkbox for sorting by date
+sort_by_date = st.checkbox("Sort by Date")
+
+# Search button
 if st.button("Search"):
     if query:
         # Make a GET request to the FastAPI backend
-        response = requests.get(backend_url, params={"query_text": query})
+        params = {"query_text": query, "sort_by_date": sort_by_date}
+        response = requests.get(backend_url, params=params)
 
         if response.status_code == 200:
             similar_chunks = response.json()
@@ -287,28 +288,37 @@ if st.button("Search"):
                     context_text = chunk["chunk_text"]
                     page_number = chunk["page_number"]
                     pdf_filename = chunk["document_file_name"]
+                    case_date = chunk["case_date"]  # Extract case date
 
-                    # Display each chunk within a card
+                    # Display each chunk
                     st.write(f"**Filename: {pdf_filename}**")
                     st.write(f"Page Number: {page_number}")
+                    st.write(f"Case Date: {case_date}")  # Display case date
                     st.write(context_text)
 
                     # Create a clickable link to the PDF document with the page number
+                    
+
                     pdf_link = f"http://localhost:8000/pdfs/{urllib.parse.quote(pdf_filename)}#page={page_number}"
+
+                    
                     st.write(f"View PDF: [Open PDF]({pdf_link})")
 
+
                     pdf_url = f"http://localhost:8000/pdfs/{urllib.parse.quote(pdf_filename)}"
+
                     
-                    # Display preview image without using multiple buttons
-                    # button_key = f"display_page_{idx}_image" 
-                    # if st.button("Display Page as Image", key=button_key):
-                    #     pdf_image_url = f"{backend_url}/pdf_image/{pdf_filename}/{page_number}"
-                    #     response = requests.get(pdf_image_url)
-                        
-                    #     if response.status_code == 200:
-                    #         st.image(response.content, use_column_width=True)
-                    #     else:
-                    #         st.write("Error: Unable to fetch the image.")
+
+                    # Fetch and display document summary
+                    summary_response = requests.post(summary_url, json={"filepath": pdf_filename})
+                    if summary_response.status_code == 200:
+                        summary_text = summary_response.json().get("summary")
+                        st.write("Document Summary:")
+                        st.text_area(label="Summary Text", value=summary_text, height=200)
+                    else:
+                        st.write("Error fetching document summary.")
+
+                    # Display PDF page as image
                     image_link = f"{base_url}/pdf_image/{urllib.parse.quote(pdf_filename)}/{page_number}"
                     st.markdown(f"Preview: [View]({image_link})")
                     button_key = f"display_page_{idx}_image" 
@@ -318,14 +328,16 @@ if st.button("Search"):
                         img_bytes = image.tobytes()
                         img = Image.open(BytesIO(img_bytes))
                         st.image(img, caption=f"Page {page_number} as Image", use_column_width=True)
-
-                    st.markdown("---")  # Add a horizontal line to separate cards
+                    
+                    # Add a separator between chunks
+                    st.markdown("---")
             else:
                 st.write("No similar chunks found.")
         else:
             st.write("Error connecting to the backend.")
     else:
         st.write("Please enter a query.")
+
 
 
 

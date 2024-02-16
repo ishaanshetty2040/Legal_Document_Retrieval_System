@@ -18,7 +18,7 @@ VEC_INDEX_DIM = 384
 vec_index = AnnoyIndex(VEC_INDEX_DIM, 'angular')
 
 # Connect to the SQLite database
-conn = sqlite3.connect('my_chunks2.db')
+conn = sqlite3.connect('my_chunks3.db')
 cursor = conn.cursor()
 
 
@@ -51,5 +51,3 @@ vec_index.build(100) #100 specifies number of trees to build
 
 # Save the built index to a file for future use
 vec_index.save("./vecindex.ann")
-
-
