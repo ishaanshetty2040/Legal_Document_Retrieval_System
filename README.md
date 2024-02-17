@@ -1,17 +1,59 @@
-Legal Sarathi
-Our idea tackles a significant issue that attorneys in Indian courts deal with: the laborious and prone to error manual analysis of unstructured legal case documents.Insufficient contextual knowledge frequently causes delays and imprecise case comprehension. We suggest creating an automated event extraction tool as a solution to this. This program efficiently extracts important events, important players and timelines.
-Optimizing case analysis through an intuitive interface, guaranteeing prompt and precise insights.
 
-Installation:
+# Legal Sarathi
 
-Using the Interface:
+Legal Sarathi Our idea tackles a significant issue that attorneys in Indian courts deal with: the laborious and prone to error manual analysis of unstructured legal case documents.Insufficient contextual knowledge frequently causes delays and imprecise case comprehension. We suggest creating an automated event extraction tool as a solution to this. This program efficiently extracts important events, important players and timelines. Optimizing case analysis through an intuitive interface, guaranteeing prompt and precise insights.
 
-1. Upon opening the tool in your web browser, you will be greeted with the search interface.
-2. Enter keywords related to the legal case you want to analyze in the provided search bar.
-3. Press the "Search" button or hit Enter to initiate the search.
-4. View the search results displayed on the screen, including relevant events, key players, and timelines extracted from legal documents.
-5. Click on any result to access the full PDF document for detailed analysis.
-Contributing:
-License:
 
+![Logo](https://raw.githubusercontent.com/ishaanshetty2040/Legal_Document_Retrieval_System/main/LOGO-PROJECT.png)
+
+
+## Installation
+
+To get started with Legal Sarathi, follow these simple steps:
+
+### Prerequisites
+Docker installed on your system
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/ishaanshetty2040/Legal_Document_Retrieval_System.git
+
+cd Legal case Retrieval
+```
+### Step 2: Build the Docker Image
+We have provided a Dockerfile to streamline the setup process. Execute the following command to build the Docker image:
+```bash
+docker build -t myLegalSarathi .
+
+```
+
+### Step 3: Verify the Image Creation:
+To ensure your image has been created and is listed among your local Docker images, run:
+```bash
+docker images
+
+```
+You should see **myLegalSarathi** in the list of available images
+
+### Step 4: Run the Container
+Once the Docker image is built successfully, run the container using the following command:
+```bash
+docker run -d --name project-container myLegalSarathi
+
+
+```
+Congratulations! You have successfully set up Legal Sarathi on your system.
+
+
+## Acknowledgements
+
+ - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+ - [Awesome README](https://github.com/matiassingers/awesome-readme)
+ - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+
+
+## Demo
+
+Insert gif or link to demo
 
