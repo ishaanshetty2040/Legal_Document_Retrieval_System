@@ -162,7 +162,7 @@ def extract_text_from_pdf(pdf_path):
 
 # Function to summarize text
 def summarize_text(text):
-    api_key = "a4145ab010612875d0195cb61c0a0ca48b7763ca3a67f2a65397ab86d851dd05"
+    api_key = "ENTER_YOUR_API_KEY"
     endpoint = "https://api.together.xyz/v1/completions"
     headers = {"Authorization": f"Bearer {api_key}"}
     data = {
