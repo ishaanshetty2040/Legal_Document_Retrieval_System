@@ -71,5 +71,6 @@ At the end, it wouldn’t have been possible without the dedication and collabor
 
 ## Demo
 
-https://vimeo.com/933791552
+https://github.com/ishaanshetty2040/Legal_Document_Retrieval_System/assets/81769425/0b2e13dc-f8d8-41cb-9f8d-c3d3ae690bb7
+
 
