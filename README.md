@@ -65,11 +65,11 @@ Now that you have both the backend and frontend running, Legal Sarathi should be
 
 ### Goals
 * Develop an automated event extraction tool for legal case documents in Indian courts.
-#^  Focus on capturing the context surrounding extracted events and participants to enhance comprehension of legal cases.
+* Focus on capturing the context surrounding extracted events and participants to enhance comprehension of legal cases.
 * Improve legal insights by providing meaningful and relevant insights from extracted events, aiding in trend identification.
-4.Develop a natural language processing (NLP) system capable of understanding user queries in natural language.
-5.Enable users to access the full PDF document directly from the search results.
-6.Providing full summary of the pdf and then user can also sort documents based on relevance most recent or oldest.
+* Develop a natural language processing (NLP) system capable of understanding user queries in natural language.
+* Enable users to access the full PDF document directly from the search results.
+* Providing full summary of the pdf and then user can also sort documents based on relevance most recent or oldest.
 
 ## Acknowledgements
 
