@@ -52,6 +52,16 @@ To enable the backend, you will need to start the Uvicorn server. The server wil
 ```bash
   uvicorn searchIndex:app --reload
 ```
+
+### Step 6: Start the Frontend
+To render the frontend, use the Streamlit application.
+
+```bash
+  streamlit run frontend.py
+```
+
+
+Now that you have both the backend and frontend running, Legal Sarathi should be fully operational. Enjoy using your Legal Sarathi application!
 ## Acknowledgements
 
 
