@@ -55,5 +55,5 @@ Congratulations! You have successfully set up Legal Sarathi on your system.
 
 ## Demo
 
-Insert gif or link to demo
+![gif](https://raw.githubusercontent.com/ishaanshetty2040/Legal_Document_Retrieval_System/main/Demo.gif)
 
