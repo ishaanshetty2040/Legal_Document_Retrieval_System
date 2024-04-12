@@ -1,7 +1,7 @@
 
 # Legal Sarathi
 
-Legal Sarathi Our idea tackles a significant issue that attorneys in Indian courts deal with: the laborious and prone to error manual analysis of unstructured legal case documents.Insufficient contextual knowledge frequently causes delays and imprecise case comprehension. We suggest creating an automated event extraction tool as a solution to this. This program efficiently extracts important events, important players and timelines. Optimizing case analysis through an intuitive interface, guaranteeing prompt and precise insights.
+Our idea tackles a significant issue that attorneys in Indian courts deal with: the laborious and prone-to-error manual analysis of unstructured legal case documents. Insufficient contextual knowledge frequently causes delays and imprecise case comprehension. We suggest creating an automated event extraction tool as a solution to this. This program efficiently extracts important events, important players and timelines. We propose to optimize case analysis through an intuitive interface, guaranteeing precise insights.
 
 
 ![Logo](https://raw.githubusercontent.com/ishaanshetty2040/Legal_Document_Retrieval_System/main/LOGO-PROJECT.png)
@@ -19,7 +19,7 @@ Docker installed on your system
 ```bash
 git clone https://github.com/ishaanshetty2040/Legal_Document_Retrieval_System.git
 
-cd Legal case Retrieval
+cd Legal_Document_Retrieval_System
 ```
 ### Step 2: Build the Docker Image
 We have provided a Dockerfile to streamline the setup process. Execute the following command to build the Docker image:
@@ -45,7 +45,7 @@ docker run -d --name project-container myLegalSarathi
 ```
 Congratulations! You have successfully set up Legal Sarathi on your system.
 
-### Step 5: Start the Backend
+### Step 5: Start the Backend (say on terminal 1)
 
 To enable the backend, you will need to start the Uvicorn server. The server will host the ASGI application that powers the backend of Legal Sarathi. Run the following command inside the Docker container:
 ⁠ 
@@ -53,7 +53,7 @@ To enable the backend, you will need to start the Uvicorn server. The server wil
   uvicorn searchIndex:app --reload
 ```
 
-### Step 6: Start the Frontend
+### Step 6: Start the Frontend (say on another terminal, terminal 2)
 To render the frontend, use the Streamlit application.
 
 ```bash
