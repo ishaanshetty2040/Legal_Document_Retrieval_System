@@ -48,12 +48,10 @@ Congratulations! You have successfully set up Legal Sarathi on your system.
 
 ## Acknowledgements
 
- - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+
 
 
 ## Demo
 
-![gif](https://raw.githubusercontent.com/ishaanshetty2040/Legal_Document_Retrieval_System/main/Demo.gif)
+https://vimeo.com/933791552
 
