@@ -62,9 +62,11 @@ To render the frontend, use the Streamlit application.
 
 
 Now that you have both the backend and frontend running, Legal Sarathi should be fully operational. Enjoy using your Legal Sarathi application!
+
 ## Acknowledgements
 
-
+We extend our heartfelt gratitude to Mr. Harsh Singhal and Mr. Shivananda S for their invaluable guidance and support throughout the duration of this project. Their expertise and encouragement have been instrumental in shaping our ideas and refining our approach. 
+At the end, it wouldn’t have been possible without the dedication and collaborative spirit of the diligent team members(Ishaan, Joshitha, Kritika and Ninaad, students of Ramaiah Institute of Technology) which has significantly contributed towards the success of this endeavor.
 
 
 ## Demo
