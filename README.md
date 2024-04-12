@@ -45,6 +45,11 @@ docker run -d --name project-container myLegalSarathi
 ```
 Congratulations! You have successfully set up Legal Sarathi on your system.
 
+### Step 5: Start the Backend
+
+To enable the backend, you will need to start the Uvicorn server. The server will host the ASGI application that powers the backend of Legal Sarathi. Run the following command inside the Docker container:
+⁠ bash
+  uvicorn searchIndex:app --reload
 
 ## Acknowledgements
 
