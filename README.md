@@ -63,6 +63,14 @@ To render the frontend, use the Streamlit application.
 
 Now that you have both the backend and frontend running, Legal Sarathi should be fully operational. Enjoy using your Legal Sarathi application!
 
+### Goals
+1.Develop an automated event extraction tool for legal case documents in Indian courts.
+2.Focus on capturing the context surrounding extracted events and participants to enhance comprehension of legal cases.
+3.Improve legal insights by providing meaningful and relevant insights from extracted events, aiding in trend identification.
+4.Develop a natural language processing (NLP) system capable of understanding user queries in natural language.
+5.Enable users to access the full PDF document directly from the search results.
+6.Providing full summary of the pdf and then user can also sort documents based on relevance most recent or oldest.
+
 ## Acknowledgements
 
 We extend our heartfelt gratitude to Mr. Harsh Singhal and Mr. Shivananda S for their invaluable guidance and support throughout the duration of this project. Their expertise and encouragement have been instrumental in shaping our ideas and refining our approach. 
