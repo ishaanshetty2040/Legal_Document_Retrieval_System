@@ -43,7 +43,6 @@ docker run -d --name project-container myLegalSarathi
 
 
 ```
-Congratulations! You have successfully set up Legal Sarathi on your system.
 
 ### Step 5: Start the Backend (say on terminal 1)
 
