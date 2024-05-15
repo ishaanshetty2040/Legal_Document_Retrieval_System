@@ -24,7 +24,7 @@ cd Legal_Document_Retrieval_System
 ### Step 2: Build the Docker Image
 We have provided a Dockerfile to streamline the setup process. Execute the following command to build the Docker image:
 ```bash
-docker build -t myLegalSarathi .
+docker build -t mylegalsarathi .
 
 ```
 
